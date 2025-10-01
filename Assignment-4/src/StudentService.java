@@ -1,25 +1,32 @@
+import java.io.IOException;
 import java.util.*;
+import java.nio.*;
         
 public class StudentService {
     List<Student> students = new ArrayList<>();
     List<Address> addresses = new ArrayList<>();
     List<ClassDetail> classes = new ArrayList<>();
-
-    // insert data
-    public void insertData() {
+    //FileWriter fw = null;
+    public void insertData() throws IOException {
         classes.add(new ClassDetail(1, "A"));
         classes.add(new ClassDetail(2, "B"));
         classes.add(new ClassDetail(3, "C"));
         classes.add(new ClassDetail(4, "D"));
 
-        addStudent(new Student(1, "Srishti", 1, 88, "F", 10));
-        addStudent(new Student(2, "Kajal", 1, 70, "F", 11));
-        addStudent(new Student(3, "Rajneesh", 2, 88, "M", 22));
-        addStudent(new Student(4, "Sourabh", 2, 55, "M", 13));
-        addStudent(new Student(5, "kriti", 1, 30, "F", 18));
-        addStudent(new Student(6, "Ritik", 3, 30, "M", 15));
-        addStudent(new Student(7, "Naina", 1, 30, "F", 18));
-        addStudent(new Student(8, "Aman", 4, 55, "M", 13));
+        addStudent(new Student("Srishti", 1, 88, "F", 10));
+        addStudent(new Student("Kajal", 1, 70, "F", 11));
+        try
+        {
+            addStudent(new Student("Rajneesh", 2, 88, "M", 22));
+        }
+        catch (Exception e){
+            System.out.println(e);
+        }
+        addStudent(new Student("Sourabh", 2, 55, "M", 13));
+        addStudent(new Student("kriti", 1, 30, "F", 18));
+        addStudent(new Student("Ritik", 3, 30, "M", 15));
+        addStudent(new Student("Naina", 1, 30, "F", 18));
+        addStudent(new Student("Aman", 3, 55, "M", 13));
 
         addresses.add(new Address(1, 452002, "indore", 1));
         addresses.add(new Address(2, 422002, "delhi", 1));
@@ -30,22 +37,27 @@ public class StudentService {
         addresses.add(new Address(7, 482002, "mumbai", 6));
     }
 
-    public void addStudent(Student s) {
-        for (Student st : students) {
-            if (st.id == s.id) {
-                System.out.println("Student ID already exists!");
-                return;
-            }
-        }
+    public void addStudent(Student s)throws IOException {
         if (s.age > 20 ) {
-            System.out.println("Student " + s.name + " not added (Age > 20 or invalid class ID)");
-            s = null;
+            s=null;
+          throw new InvalidAgeException("Student age can't be greater than 20");
         }
-        else if (s.class_id >=4  ) {
-            System.out.println("Student " + s.name + " not added (Age > 20 or invalid class ID)");
-            s = null;
+        if (s.marks < 0 || s.marks > 100) {
+            s=null;
+            throw new InvalidMarksException("Marks can't be less than or equal to 0 or greater than 100");
+        }
+        if (s.class_id > 4) {
+            s=null;
+            throw new InvalidClassIDException("Class ID can't be Greater than 4");
+        }
+        if (!s.gender.equalsIgnoreCase("m") && !s.gender.equalsIgnoreCase("f"))
+        {
+            s=null;
+            throw new InvalidGenderException("Invalid Gender");
         }
         else {
+            int id = Student.trackID;
+            s.id = id;
             students.add(s);
             System.out.println(" Student details added successfully!");
         }
@@ -140,7 +152,6 @@ public class StudentService {
                 remaining.add(s.class_id);
             }
             classes.removeIf(c -> !remaining.contains(c.id));
-
             System.out.println(" Student with ID " + studentId + " and their details deleted successfully!");
         }
         else {
@@ -186,6 +197,26 @@ public class StudentService {
         }
     }
 
+    public void fileService(int service)
+    {
+        if (service == 1) {
+            FileService.saveData(students, "students.csv", "id,name,class_id,marks,gender,age");
+            FileService.saveData(classes, "classes.csv", "id,class_name");
+            FileService.saveData(addresses, "addresses.csv", "id,pincode,city,student_id");
+        }
+        else if (service == 2) {
+            FileService.readData();
+        }
+        else if(service == 3)
+        {
+            FileService.saveStudentsRank(students);
+        } else if (service == 4) {
+            FileService.fetchStudentsRank();
+        } else {
+            System.out.println("Invalid Choice");
+            return;
+        }
+    }
 
     public void allStudents()
         {

@@ -1,6 +1,7 @@
+import java.io.IOException;
 import java.util.Scanner;
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         StudentService studentService = new StudentService();
         studentService.insertData();
@@ -15,13 +16,12 @@ public class Main {
             System.out.println("4. Delete Student");
             System.out.println("5. List of Students");
             System.out.println("6. Pagination");
-            System.out.println("7. Exit");
+            System.out.println("7. File Services");
+            System.out.println("8. Exit");
             System.out.print("\nEnter your choice: ");
             int choice = sc.nextInt();
             switch (choice) {
                 case 0:
-                    System.out.print("Enter Student ID :");
-                    int id = sc.nextInt();
                     System.out.print("Enter Student Name :");
                     String name = sc.next();
                     System.out.print("Enter ClassID :");
@@ -32,7 +32,7 @@ public class Main {
                     String gender =  sc.next();
                     System.out.print("Enter Student Age :");
                     int age =  sc.nextInt();
-                    studentService.addStudent(new Student(id, name, class_id, marks, gender, age));
+                    studentService.addStudent(new Student(name, class_id, marks, gender, age));
                     break;
                 case 1:
                     System.out.println("\n--- Find Student Sub-Menu ---");
@@ -118,8 +118,16 @@ public class Main {
                             break;
                     }
                     break;
-
                 case 7:
+                    System.out.println("      Select Option : ");
+                    System.out.println("      1. Insert Data into File ");
+                    System.out.println("      2. Read Data From File ");
+                    System.out.println("      3. Store Ranks of Students");
+                    System.out.print("      4. Fetch Ranks of Students :  \n        ");
+                    int x = sc.nextInt();
+                    studentService.fileService(x);
+                   break;
+                case 8:
                     System.out.println(" Exiting...");
                     return;
 

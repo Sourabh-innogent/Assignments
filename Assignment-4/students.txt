@@ -1,0 +1,8 @@
+ID,Name,ClassID,Gender,Age
+1,Srishti,1,88,F,10
+2,Kajal,1,70,F,11
+4,Sourabh,2,55,M,13
+5,kriti,1,30,F,18
+6,Ritik,3,30,M,15
+7,Naina,1,30,F,18
+8,Aman,3,55,M,13

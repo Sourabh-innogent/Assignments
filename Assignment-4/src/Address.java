@@ -3,7 +3,6 @@ public class Address {
     int pincode;
     String city;
     int student_id;
-
     public Address(int id, int pincode, String city, int student_id) {
         this.id = id;
         this.pincode = pincode;
@@ -11,7 +10,8 @@ public class Address {
         this.student_id = student_id;
     }
 
-    public String toString(){
-        return "pincode : "+ pincode+" || City : "+ city;
+    @Override
+    public String toString() {
+        return id + "," + pincode + "," + city + "," + student_id;
     }
 }
