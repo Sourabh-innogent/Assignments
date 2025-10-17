@@ -1,15 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="fa3c6e6e-bfb4-4161-9d01-565caab2651a" name="Changes" comment="" />
+    <list default="true" id="fa3c6e6e-bfb4-4161-9d01-565caab2651a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignment - 2/src" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignment - 2/src" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SpringAssignment/src/main/java/com/example/SpringbootDemo/controller/StudentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SpringAssignment/src/main/java/com/example/SpringbootDemo/controller/StudentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SpringAssignment/src/main/java/com/example/SpringbootDemo/repository/StudentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SpringAssignment/src/main/java/com/example/SpringbootDemo/repository/StudentRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SpringAssignment/src/main/java/com/example/SpringbootDemo/service/StudentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SpringAssignment/src/main/java/com/example/SpringbootDemo/service/StudentService.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 6
-}]]></component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
   <component name="ProjectId" id="33NMctKyyBOkgtle4gtmyHPtQkz" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -20,9 +32,15 @@
     "Application.Bank.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/SourabhYadav/Desktop/Innogent Assignments/Assignment - 1",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
     "to.speed.mode.migration.done": "true",
     "vue.rearranger.settings.migration": "true"
   }
@@ -43,10 +61,22 @@
       <option name="presentableId" value="Default" />
       <updated>1759153284939</updated>
       <workItem from="1759153286129" duration="64000" />
+      <workItem from="1760545853588" duration="744000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/out/production/Assignment --1/SavingsAccount.class</url>
+          <line>7</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
