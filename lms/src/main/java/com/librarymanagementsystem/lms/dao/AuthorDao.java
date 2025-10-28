@@ -3,13 +3,13 @@ package com.librarymanagementsystem.lms.dao;
 
 import com.librarymanagementsystem.lms.dto.AuthorRequest;
 import com.librarymanagementsystem.lms.dto.AuthorResponse;
+import com.librarymanagementsystem.lms.dto.BooksRequest;
 import com.librarymanagementsystem.lms.model.Author;
 import com.librarymanagementsystem.lms.repo.AuthorRepo;
+import com.librarymanagementsystem.lms.repo.BooksRepo;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -20,11 +20,22 @@ public class AuthorDao {
     AuthorRepo authorRepo;
 
     @Autowired
+    BooksRepo booksRepo;
+
+    @Autowired
     private ModelMapper modelMapper;
 
-    public void addAuthor(AuthorRequest author)
-    {
-       authorRepo.save(modelMapper.map(author, Author.class));
+    public void addAuthor(AuthorRequest authorRequest) {
+        Author author = new Author();
+
+        author.setAuthor_name(authorRequest.getAuthor_name());
+
+        if (authorRequest.getBooks() != null && !authorRequest.getBooks().isEmpty()) {
+            var bookEntities = booksRepo.findAllById(authorRequest.getBooks());
+            author.setBooks(bookEntities);
+        }
+
+        authorRepo.save(author);
     }
 
     public AuthorResponse findAuthorById(Long id)
@@ -47,16 +58,22 @@ public class AuthorDao {
         }
     }
 
-    public AuthorResponse updateAuthor(AuthorRequest authorRequest)
-    {
-        Author author =  authorRepo.findById(authorRequest.getId()).orElseThrow(NoSuchElementException::new);
-        if(author != null)
-        {
-            Author updated = modelMapper.map(authorRequest, Author.class);
-            authorRepo.save(updated);
-            return modelMapper.map(updated, AuthorResponse.class);
+    public AuthorResponse updateAuthor(AuthorRequest authorRequest) {
+        Author author = authorRepo.findById(authorRequest.getId())
+                .orElseThrow(() -> new NoSuchElementException("Author not found"));
+
+        if (authorRequest.getAuthor_name() != null) {
+            author.setAuthor_name(authorRequest.getAuthor_name());
         }
-        return null;
+
+        if (authorRequest.getBooks() != null && !authorRequest.getBooks().isEmpty()) {
+            var bookEntities = booksRepo.findAllById(authorRequest.getBooks());
+            author.setBooks(bookEntities);
+        }
+
+        Author saved = authorRepo.save(author);
+
+        return modelMapper.map(saved, AuthorResponse.class);
     }
 
     public List<AuthorResponse> getAllAuthors()

@@ -4,10 +4,7 @@ import com.librarymanagementsystem.lms.dao.LibraryDao;
 import com.librarymanagementsystem.lms.service.LibraryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -25,5 +22,15 @@ public class LibraryController {
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body("Error: " + e.getMessage());
         }
+    }
+
+        @PostMapping("/return/{memberId}/{bookId}")
+        public ResponseEntity<String> returnBook(@PathVariable Long memberId, @PathVariable Long bookId) {
+            try {
+                service.returnBook(memberId, bookId);
+                return ResponseEntity.ok("Book returned successfully!");
+            } catch (RuntimeException e) {
+                return ResponseEntity.badRequest().body("Error: " + e.getMessage());
+            }
     }
 }

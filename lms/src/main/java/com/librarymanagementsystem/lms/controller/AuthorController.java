@@ -27,7 +27,7 @@ public class AuthorController {
         return ResponseEntity.ok(service.getAllAuthors());
     }
 
-    @PutMapping("/update")
+    @PatchMapping("/update")
     public ResponseEntity<AuthorResponse> update( @RequestBody AuthorRequest authorRequest ){
         return ResponseEntity.ok(service.updateAuthor(authorRequest));
     }

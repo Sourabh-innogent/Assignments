@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1ec0476c-ea37-4510-82cf-48b7e7324735" name="Changes" comment="" />
+    <list default="true" id="1ec0476c-ea37-4510-82cf-48b7e7324735" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../Assignment - 1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignment - 1/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignment - 2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignment - 2/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignment - 2/src" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignment - 2/src" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -16,6 +21,9 @@
         <option value="Class" />
       </list>
     </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$USER_HOME$/AppData/Local/Temp/40d60b6e-01c0-47d1-836d-d0f7c684f3bb_ExceptionHandling (1).zip.3bb/ExceptionHandling/src/GlobalExceptionDemo.java" root0="FORCE_HIGHLIGHTING" />
@@ -36,6 +44,8 @@
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/SourabhYadav/Desktop/Innogent Assignments/Assignment - 3",
@@ -66,18 +76,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Demo (1)" />
         <item itemvalue="Application.Demo" />
+        <item itemvalue="Application.Demo (1)" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.26199.169" />
-        <option value="bundled-js-predefined-d6986cc7102b-9c94529fcfe0-JavaScript-IU-252.26199.169" />
-      </set>
-    </attachedChunks>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

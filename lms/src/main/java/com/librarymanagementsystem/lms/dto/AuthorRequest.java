@@ -1,5 +1,4 @@
 package com.librarymanagementsystem.lms.dto;
-import com.librarymanagementsystem.lms.model.Books;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,6 +17,6 @@ public class AuthorRequest {
 
     private String author_name;
 
-    private List<String> books;
+    private List<Long> books;
 
 }

@@ -33,7 +33,7 @@ class Manager
     }
 
     public synchronized void produce() {
-     //   while (true) {
+        while (true) {
             while (flag) {
                 try {
                     wait(100);
@@ -57,11 +57,8 @@ class Manager
 
                 }
             }
-
-
-
         }
-   // }
+    }
 
     public synchronized void consume() {
 //        while (true) {

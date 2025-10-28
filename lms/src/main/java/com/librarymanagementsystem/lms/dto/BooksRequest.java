@@ -20,7 +20,7 @@ public class BooksRequest {
 
     Integer stock;
 
-    Author author;
+    Long author_id;
 
     private List<Member> members;
 

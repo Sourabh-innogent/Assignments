@@ -13,5 +13,9 @@ public class LibraryService {
         public void borrowBook(Long memberId, Long bookId) {
           libraryDao.borrowBook(memberId,bookId);
             }
+
+    public void returnBook(Long memberId, Long bookId) {
+        libraryDao.returnBook(memberId,bookId);
+    }
     }
 

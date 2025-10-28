@@ -37,4 +37,22 @@ public class LibraryDao {
         bookRepository.save(book);
         memberRepository.save(member);
     }
+
+    @Transactional
+    public void returnBook(Long memberId, Long bookId) {
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new RuntimeException("Member not found"));
+        Books book = bookRepository.findById(bookId)
+                .orElseThrow(() -> new RuntimeException("Book not found"));
+
+        if (!member.getBorrowedBooks().contains(book)) {
+            throw new RuntimeException("This member has not borrowed this book!");
+        }
+
+        book.setStock(book.getStock() + 1);
+        member.getBorrowedBooks().remove(book);
+
+        memberRepository.save(member);
+        bookRepository.save(book);
+    }
 }

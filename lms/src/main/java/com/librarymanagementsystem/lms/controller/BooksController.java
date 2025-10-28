@@ -26,7 +26,7 @@ public class BooksController {
         return ResponseEntity.ok(service.getAllBooks());
     }
 
-    @PutMapping("/update")
+    @PatchMapping("/update")
     public ResponseEntity<BooksResponse> update( @RequestBody BooksRequest bookRequest ){
         return ResponseEntity.ok(service.updateBook(bookRequest));
     }

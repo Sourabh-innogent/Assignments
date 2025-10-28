@@ -6,6 +6,7 @@ import com.librarymanagementsystem.lms.model.Books;
 import com.librarymanagementsystem.lms.model.Member;
 import com.librarymanagementsystem.lms.repo.BooksRepo;
 import com.librarymanagementsystem.lms.repo.MembersRepo;
+import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -26,13 +27,21 @@ public class MemberDao {
     private BooksRepo booksRepo;
 
     public void add(MemberRequest memberRequest) {
-
         List<Books> borrowedBooks = booksRepo.findAllById(memberRequest.getBookIds());
+
+        for (Books b : borrowedBooks) {
+            if (b.getStock() < 1) {
+                throw new RuntimeException("Book " + b.getBook_title() + " is out of stock!");
+            }
+            b.setStock(b.getStock() - 1);
+        }
+
+        booksRepo.saveAll(borrowedBooks);
 
         Member member = Member.builder()
                 .name(memberRequest.getName())
                 .email(memberRequest.getEmail())
-                .borrowedBooks(borrowedBooks) // set books directly
+                .borrowedBooks(borrowedBooks)
                 .build();
 
         membersRepo.save(member);
@@ -55,6 +64,7 @@ public class MemberDao {
         }
     }
 
+    @Transactional
     public MemberResponse updateMember(MemberRequest memberRequest) {
         Member member = membersRepo.findById(memberRequest.getMember_id())
                 .orElseThrow(() -> new NoSuchElementException("Member not found"));
@@ -62,16 +72,32 @@ public class MemberDao {
         member.setName(memberRequest.getName());
         member.setEmail(memberRequest.getEmail());
 
-        if (memberRequest.getBookIds() != null) {
-            List<Books> books = booksRepo.findAllById(memberRequest.getBookIds());
-            member.setBorrowedBooks(books);
+        List<Books> oldBooks = member.getBorrowedBooks();
+        List<Books> newBooks = booksRepo.findAllById(memberRequest.getBookIds());
+
+        for (Books b : oldBooks) {
+            if (!newBooks.contains(b)) {
+                b.setStock(b.getStock() + 1);
+            }
         }
 
+        for (Books b : newBooks) {
+            if (!oldBooks.contains(b)) {
+                if (b.getStock() < 1) {
+                    throw new RuntimeException("Book '" + b.getBook_title() + "' is out of stock!");
+                }
+                b.setStock(b.getStock() - 1);
+            }
+        }
+
+        booksRepo.saveAll(newBooks);
+        booksRepo.saveAll(oldBooks);
+
+        member.setBorrowedBooks(newBooks);
         membersRepo.save(member);
+
         return modelMapper.map(member, MemberResponse.class);
     }
-
-
 
 
     public List<MemberResponse> getAllMembers()
