@@ -1,5 +1,5 @@
 
-class CurrentAccount extends Account implements AutoLoan {
+class CurrentAccount extends Account{
     public static final double OVERDRAFT_LIMIT = 10000.0;
 
     CurrentAccount(double balance) {
@@ -22,7 +22,4 @@ class CurrentAccount extends Account implements AutoLoan {
         }
     }
 
-    public void applyAutoLoan(double amount) {
-        System.out.println("Auto loan of ₹" + amount + " applied successfully for Savings Account.");
-    }
 }
