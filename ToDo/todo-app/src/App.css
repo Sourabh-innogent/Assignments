@@ -1,0 +1,144 @@
+/* 🌿 Basic setup */
+body {
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #bad7f1b4, #ab31b6);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  margin: 0;
+  padding-top: 60px;
+}
+
+/* 🧭 Main container with iOS-style glassmorphism */
+.app-container {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 3px solid rgba(197, 52, 52, 0.4);
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(113, 81, 81, 0.537);
+  width: 420px;
+  padding: 25px;
+  text-align: center;
+}
+
+/* 🏷️ Heading */
+h1 {
+  color: #1c2833;
+  font-weight: 600;
+  margin-bottom: 25px;
+  letter-spacing: 0.5px;
+}
+
+/* 🖊️ Task Form */
+.task-form {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 25px;
+}
+
+.task-form input {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 8px;
+  outline: none;
+  background: rgba(255, 255, 255, 0.3);
+  color: #2c3e50;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.task-form input:focus {
+  border-color: #3498db;
+  box-shadow: 0 0 6px rgba(52, 152, 219, 0.4);
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.task-form button {
+  background: rgba(52, 152, 219, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.task-form button:hover {
+  background: rgba(52, 152, 219, 0.9);
+}
+
+/* 📝 Task List */
+.task-list {
+  text-align: left;
+}
+
+/* Each task item with iOS liquid glass effect */
+.task-item {
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  padding: 12px 14px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.task-item:hover {
+  background: rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
+}
+
+/* 📦 Task text */
+.task-item span {
+  flex: 1;
+  color: #1a1a1a;
+  font-size: 15px;
+}
+
+/* 🧩 Buttons */
+.task-item .buttons button {
+  margin-left: 6px;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: 0.3s;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.task-item .buttons button:first-child {
+  background: rgba(73, 235, 81, 0.86);
+  color: #333;
+}
+
+.task-item .buttons button:first-child:hover {
+  background: rgba(77, 254, 71, 0.474);
+}
+
+.task-item .buttons button:last-child {
+  background: rgba(216, 96, 83, 0.926);
+  color: #fff;
+}
+
+.task-item .buttons button:last-child:hover {
+  background: rgba(192, 57, 43, 0.9);
+}
+
+/* 🌈 Empty message */
+.task-list p {
+  text-align: center;
+  color: #555;
+  font-style: italic;
+}

@@ -20,19 +20,12 @@ public class Main {
             int choice = sc.nextInt();
             switch (choice) {
                 case 0:
-                    System.out.print("Enter Student ID :");
-                    int id = sc.nextInt();
-                    System.out.print("Enter Student Name :");
-                    String name = sc.next();
-                    System.out.print("Enter ClassID :");
-                    int class_id =  sc.nextInt();
-                    System.out.print("Enter Student Marks :");
-                    int marks = sc.nextInt();
-                    System.out.print("Enter Student Gender :");
-                    String gender =  sc.next();
-                    System.out.print("Enter Student Age :");
-                    int age =  sc.nextInt();
-                    studentService.addStudent(new Student(id, name, class_id, marks, gender, age));
+                    String name = getValidStringInput(sc, "Enter Student Name: ");
+                    int class_id = getValidIntInput(sc, "Enter ClassID: ", 1, 4);
+                    int marks = getValidIntInput(sc, "Enter Student Marks (0-100): ", 0, 100);
+                    String gender = getValidStringInput(sc, "Enter Student Gender (M/F): ");
+                    int age = getValidIntInput(sc, "Enter Student Age: ", 1, 120);
+                    studentService.addStudent(new Student(name, class_id, marks, gender, age));
                     break;
                 case 1:
                     System.out.println("\n--- Find Student Sub-Menu ---");
@@ -48,18 +41,17 @@ public class Main {
                             return;
                         case 1:
                             System.out.println("Finding by City...");
-                            System.out.print("Enter City :");
-                            studentService.findByCity(sc.next());
+                            String city = getValidStringInput(sc, "Enter City : ");
+                            studentService.findByCity(city);
                             break;
                         case 2:
                             System.out.println("Finding by Pincode..");
-                            System.out.print("Enter PinCode :");
-                            studentService.findByPin(sc.nextInt());
+                            int pin = getValidIntInput(sc, "Enter PinCode : ", 000000, 999999);
+                            studentService.findByPin(pin);
                             break;
                         case 3:
                             System.out.println("Finding by Class...");
-                            System.out.print("Enter Class Name :");
-                            studentService.findByClass(sc.next());
+                            studentService.findByClass(getValidIntInput(sc, "Enter Class ID : ", 1, 4));
                             break;
                         default:
                             System.out.println("Invalid choice.");
@@ -72,13 +64,11 @@ public class Main {
                     break;
 
                 case 3:
-                    System.out.print("Enter Student Name : ");
-                    studentService.getResult(sc.next());
+                    studentService.getResult(getValidStringInput(sc, "Enter Student Name: "));
                     return;
 
                 case 4:
-                    System.out.print("Enter Student ID : ");
-                    studentService.deleteStudent(sc.nextInt());
+                    studentService.deleteStudent(getValidIntInput(sc, "Enter Student ID: ", 1, Integer.MAX_VALUE));
                     break;
 
                 case 5:
@@ -124,9 +114,35 @@ public class Main {
                     return;
 
                 default:
-                    System.out.println("Invalid main choice!");
+                    System.out.println("Invalid choice!");
                     break;
             }
         }
+    }
+
+    private static int getValidIntInput(Scanner sc, String message, int min, int max) {
+        while (true) {
+            System.out.print(message);
+            if (sc.hasNextInt()) {
+                int value = sc.nextInt();
+                if (value >= min && value <= max) return value;
+                else System.out.println("⚠️ Please enter a value between " + min + " and " + max + ".");
+            } else {
+                System.out.println("⚠️ Invalid input! Please enter a number.");
+                sc.next(); // clear wrong input
+            }
+        }
+    }
+
+    // ✅ Validation for non-empty string input
+    private static String getValidStringInput(Scanner sc, String message) {
+        String input;
+        do {
+            System.out.print(message);
+            input = sc.next();
+            if (input.trim().isEmpty())
+                System.out.println("⚠️ Input cannot be empty.");
+        } while (input.trim().isEmpty());
+        return input;
     }
 }

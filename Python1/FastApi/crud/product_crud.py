@@ -3,6 +3,7 @@ from fastapi import HTTPException
 from starlette import status
 
 import exception
+from models import Category, Company
 from models.product import Product
 from schemas.product_schema import  ProductCreate
 
@@ -28,50 +29,83 @@ def create_product(db: Session, product: ProductCreate):
 def get_all_products(db: Session):
     return db.query(Product).all()
 
+def filter_products(
+    db: Session,
+    name: str = None,
+    price: float = None,
+    category: str = None,
+    company: str = None,
+):
+    query = db.query(Product)
 
-def get_product_by_id(db: Session, product_id: int):
-    product = db.query(Product).filter(Product.id == product_id).first()
-    if not product:
-        raise exception.ProductNotFoundError()
-    return product
+    # Filter by product name (partial match)
+    if name:
+        query = query.filter(Product.name.ilike(f"%{name}%"))
 
-def get_product_by_name(db: Session, name: str):
-    products = db.query(Product).filter(Product.name.ilike(f"%{name}%")).all()
+    # Filter by exact price
+    if price is not None:
+        query = query.filter(Product.price == price)
+
+    # Filter by category name
+    if category:
+        cat = db.query(Category).filter(Category.name.ilike(f"%{category}%")).first()
+        if not cat:
+            raise HTTPException(status_code=404, detail="Category not found")
+        query = query.filter(Product.category_id == cat.id)
+
+
+    products = query.all()
+
     if not products:
-        raise exception.ProductNotFoundError()
+        raise HTTPException(status_code=404, detail="Product not found")
+
     return products
 
 
-def get_product_by_price(db: Session, price: float):
-    products = db.query(Product).filter(Product.price == price).all()
-    if not products:
-        raise exception.ProductNotFoundError()
-    return products
-
-def get_products_by_company(db: Session, company_name: str):
-    from models.company import Company
-
-    company = db.query(Company).filter(Company.name == company_name).first()
-    if not company:
-        raise HTTPException(status_code=404, detail="Company not found")
-
-    products = db.query(Product).filter(Product.category_id == company.id).all()
-    if not products:
-        raise exception.ProductNotFoundError()
-    return products
-
-
-def get_products_by_category(db: Session, category_name: str):
-    from models.category import Category
-
-    category = db.query(Category).filter(Category.name == category_name).first()
-    if not category:
-        raise HTTPException(status_code=404, detail="Category not found")
-
-    products = db.query(Product).filter(Product.category_id == category.id).all()
-    if not products:
-        raise exception.ProductNotFoundError()
-    return products
+#
+# def get_product_by_id(db: Session, product_id: int):
+#     product = db.query(Product).filter(Product.id == product_id).first()
+#     if not product:
+#         raise exception.ProductNotFoundError()
+#     return product
+#
+# def get_product_by_name(db: Session, name: str):
+#     products = db.query(Product).filter(Product.name.ilike(f"%{name}%")).all()
+#     if not products:
+#         raise exception.ProductNotFoundError()
+#     return products
+#
+#
+# def get_product_by_price(db: Session, price: float):
+#     products = db.query(Product).filter(Product.price == price).all()
+#     if not products:
+#         raise exception.ProductNotFoundError()
+#     return products
+#
+# def get_products_by_company(db: Session, company_name: str):
+#     from models.company import Company
+#
+#     company = db.query(Company).filter(Company.name == company_name).first()
+#     if not company:
+#         raise HTTPException(status_code=404, detail="Company not found")
+#
+#     products = db.query(Product).filter(Product.category_id == company.id).all()
+#     if not products:
+#         raise exception.ProductNotFoundError()
+#     return products
+#
+#
+# def get_products_by_category(db: Session, category_name: str):
+#     from models.category import Category
+#
+#     category = db.query(Category).filter(Category.name == category_name).first()
+#     if not category:
+#         raise HTTPException(status_code=404, detail="Category not found")
+#
+#     products = db.query(Product).filter(Product.category_id == category.id).all()
+#     if not products:
+#         raise exception.ProductNotFoundError()
+#     return products
 
 
 def update_product(db: Session, product_id: int, product_data: ProductCreate):

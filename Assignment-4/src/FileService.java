@@ -15,7 +15,7 @@ public class FileService {
             Files.write(Paths.get(fileName), lines,
                     StandardOpenOption.CREATE,
                     StandardOpenOption.TRUNCATE_EXISTING);
-            System.out.println("✅ Data saved to " + fileName);
+            System.out.println(" Data saved to " + fileName);
         } catch (IOException e) {
             System.out.println("Error saving " + fileName + ": " + e.getMessage());
         }

@@ -1,23 +1,22 @@
-
-
 public class Main {
     public static void main(String[] args) {
-        SavingsAccount savingsAccount = new SavingsAccount(40000.0F);
-        CurrentAccount currentAccount = new CurrentAccount(2000.0F);
 
-        //Transactions
-        savingsAccount.withdraw(100.0F);
-        currentAccount.withdraw(2000.0F);
+        Account sourabh = new SavingsAccount("Sourabh",40000.0);
+        Account aman = new CurrentAccount("Aman",2000.0);
 
-        System.out.println(savingsAccount.getBalance());
-        System.out.println(currentAccount.getBalance());
+        LoanService loanService = new LoanService();
 
-        currentAccount.withdraw(2000.0F);
-        System.out.println(currentAccount.getBalance());
+        // Transactions
+        sourabh.withdraw(1000);
+        aman.withdraw(2000);
 
-        savingsAccount.interestCalculation(5);
+        sourabh.getBalance();
+        aman.getBalance();
 
-        savingsAccount.applyHomeLoan(100000.0F);
-        currentAccount.applyAutoLoan(250000.0F);
+        ((SavingsAccount) sourabh).interestCalculation(5);
+
+        // Loan services
+        loanService.applyHomeLoan(sourabh,1000000.0);
+        loanService.applyAutoLoan(aman, 50000.0);
     }
 }

@@ -12,14 +12,14 @@ public class StudentService {
         classes.add(new ClassDetail(3, "C"));
         classes.add(new ClassDetail(4, "D"));
 
-        addStudent(new Student(1, "Srishti", 1, 88, "F", 10));
-        addStudent(new Student(2, "Kajal", 1, 70, "F", 11));
-        addStudent(new Student(3, "Rajneesh", 2, 88, "M", 22));
-        addStudent(new Student(4, "Sourabh", 2, 55, "M", 13));
-        addStudent(new Student(5, "kriti", 1, 30, "F", 18));
-        addStudent(new Student(6, "Ritik", 3, 30, "M", 15));
-        addStudent(new Student(7, "Naina", 1, 30, "F", 18));
-        addStudent(new Student(8, "Aman", 4, 55, "M", 13));
+        addStudent(new Student( "Srishti", 1, 88, "F", 10));
+        addStudent(new Student( "Kajal", 1, 70, "F", 11));
+        addStudent(new Student( "Rajneesh", 2, 88, "M", 22));
+        addStudent(new Student( "Sourabh", 2, 55, "M", 13));
+        addStudent(new Student( "kriti", 1, 30, "F", 18));
+        addStudent(new Student("Ritik", 3, 30, "M", 15));
+        addStudent(new Student("Naina", 1, 30, "F", 18));
+        addStudent(new Student( "Aman", 4, 55, "M", 13));
 
         addresses.add(new Address(1, 452002, "indore", 1));
         addresses.add(new Address(2, 422002, "delhi", 1));
@@ -59,11 +59,10 @@ public class StudentService {
                 } else {
                     System.out.println(name + " is Fail");
                 }
-            }
-            else {
-                System.out.println(name + "'s data is not available ");
+                return;
             }
         }
+            System.out.println(name + "'s data is not available ");
     }
 
     public void rankStudents() {
@@ -75,43 +74,61 @@ public class StudentService {
     }
 
     public void findByCity(String city) {
+        boolean found = false;
         for (Address a : addresses) {
             if (a.city.equalsIgnoreCase(city)) {
                 for (Student s : students) {
                     if (s.id == a.student_id) {
                         System.out.print(s + " || ");
                         System.out.println(a);
+                        found = true;
                     }
-                    }
+                }
             }
+        }
+        if (!found) {
+            System.out.println(" No students found living in the city: " + city);
         }
     }
 
     public void findByPin(int pin) {
+        boolean found = false;
         for (Address a : addresses) {
             if (a.pincode == pin) {
                 for (Student s : students) {
                     if (s.id == a.student_id) {
                         System.out.print(s + " || ");
                         System.out.println(a);
+                        found = true;
                     }
                 }
             }
+        }
+        if (!found) {
+            System.out.println(" No students found with PinCode: " + pin);
         }
     }
 
-    public void findByClass(String found_class) {
+    public void findByClass(int classId) {
+        boolean found = false;
+
         for (ClassDetail c : classes) {
-            if (c.class_name.equals(found_class)) {
+            if (c.id == classId) {
                 for (Student s : students) {
-                    if (s.class_id == c.id) {
+                    if (s.class_id == classId) {
                         System.out.print(s + " || ");
                         System.out.println(c);
+                        found = true;
                     }
                 }
             }
         }
+
+        if (!found) {
+            System.out.println("⚠️ No students found for Class ID: " + classId);
+        }
     }
+
 
     public void getPassed() {
         for (Student s : students) {

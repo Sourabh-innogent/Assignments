@@ -1,7 +1,8 @@
 import java.util.Comparator;
 import java.util.*;
 
-class Employee implements Comparable<Employee> {
+class Employee implements Comparable<Employee>
+ {
     int id;
     String name;
     String department;
@@ -52,7 +53,7 @@ public class EmployeeTest {
         employees.add(new Employee(101, "Sourabh", "HR", 50000));
         employees.add(new Employee(102, "Ritik", "IT", 70000));
         employees.add(new Employee(103, "Hariom", "Finance", 60000));
-        employees.add(new Employee(104, "Praveen", "IT", 55000));
+        employees.add(new Employee(104, "Ritik", "IT", 60000));
         employees.add(new Employee(105, "Krishna", "HR", 75000));
         employees.add(new Employee(106, "Arpit", "Finance", 60000));
         employees.add(new Employee(107, "Rajat", "IT", 70000));

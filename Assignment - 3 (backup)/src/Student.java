@@ -1,4 +1,5 @@
 public class Student {
+    private static int nextId = 1;
     protected   int id;
     protected   String name;
     protected   int class_id;
@@ -7,9 +8,9 @@ public class Student {
     protected   int age;
 
     public Student() {}
-    public Student(int id, String name, int class_id, int marks, String gender, int age) {
+    public Student(String name, int class_id, int marks, String gender, int age) {
 
-            this.id = id;
+            this.id = nextId++;
             this.name = name;
             this.class_id = class_id;
             this.marks = marks;

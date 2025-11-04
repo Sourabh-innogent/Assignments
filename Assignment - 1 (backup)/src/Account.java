@@ -1,26 +1,21 @@
 
-class Account {
-    protected double balance;
+abstract class Account {
+    double balance;
+    String name;
 
-    Account(double balance) {
+    Account(String name,double balance) {
+        this.name = name;
         this.balance = balance;
     }
 
-    public void withdraw(double amount) {
-        if (amount <= this.balance) {
-            this.balance -= amount;
-            System.out.println("Withdrawal of "+ amount +"successful. Remaining balance: ₹" + this.balance);
-        } else {
-            System.out.println("Insufficient balance");
-        }
-    }
+    public abstract void withdraw(double amount);
 
     public void deposit(double amount) {
+        System.out.println(name+"'s is Credited by"+ amount);
         this.balance += amount;
     }
 
-    public double getBalance() {
-        System.out.print("Available Balance:");
-        return this.balance;
+    public void getBalance() {
+        System.out.println("Available Balance in "+name+" 's Account :" +balance +"\n");
     }
 }
