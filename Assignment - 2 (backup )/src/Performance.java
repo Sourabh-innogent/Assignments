@@ -24,7 +24,7 @@ public class Performance {
 
             long startALDel = System.nanoTime();
             while (!arrayList.isEmpty()) {
-                arrayList.remove(0);
+                arrayList.remove(arrayList.size()-1);
             }
             long endALDel = System.nanoTime();
             long deletionAL =  (endALDel - startALDel);
@@ -44,7 +44,7 @@ public class Performance {
 
             long startLLDel = System.nanoTime();
             while (!linkedList.isEmpty()) {
-                linkedList.removeFirst();
+                linkedList.removeLast();
             }
             long endLLDel = System.nanoTime();
             long deletionLL =  (endLLDel - startLLDel);

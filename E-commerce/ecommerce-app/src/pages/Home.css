@@ -1,0 +1,39 @@
+.home {
+  padding: 30px;
+}
+
+.category-filter {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 20px 0;
+  gap: 10px;
+}
+
+.category-filter button {
+  border: 1px solid var(--primary-color);
+  background: white;
+  color: var(--primary-color);
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 14px;
+}
+
+.category-filter button:hover {
+  background: var(--primary-color);
+  color: white;
+}
+
+.category-filter button.active {
+  background: var(--primary-color);
+  color: white;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 25px;
+  margin-top: 20px;
+}

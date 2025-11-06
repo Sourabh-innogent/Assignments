@@ -13,7 +13,7 @@ public class DeadLockPrevention{
             try {
                 if(lock1.tryLock(1000,TimeUnit.NANOSECONDS)){
                     System.out.println(Thread.currentThread().getName() + " occupied lock1");
-                    if(lock2.tryLock(100,TimeUnit.NANOSECONDS) ){
+                    if(lock2.tryLock(100,TimeUnit.MILLISECONDS) ){
                         System.out.println(Thread.currentThread().getName() + " occupied lock1");
                         lock2.unlock();
                         }
@@ -27,8 +27,8 @@ public class DeadLockPrevention{
             try {
                 if(lock2.tryLock(1000, TimeUnit.NANOSECONDS)) {
                     System.out.println(Thread.currentThread().getName() + " occupied lock2");
-                    if(lock1.tryLock(10000,TimeUnit.NANOSECONDS)) //MilliSecond can work here
-                         {
+                    if(lock1.tryLock(10000,TimeUnit.MILLISECONDS)) //MilliSecond can work here
+                        {
                         System.out.println(Thread.currentThread().getName() + " occupied lock1");
                         }
                     }

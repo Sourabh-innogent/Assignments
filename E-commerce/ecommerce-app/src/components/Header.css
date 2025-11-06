@@ -1,0 +1,29 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgb(255, 255, 255);
+  padding: 15px 30px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.logo a {
+  color: var(--primary-color);
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.nav-icons .icon {
+  margin-left: 25px;
+  cursor: pointer;
+  font-size: 20px;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.nav-icons .icon:hover {
+  color: var(--primary-color);
+  transform: scale(1.1);
+}
