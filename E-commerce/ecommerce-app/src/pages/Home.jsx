@@ -1,17 +1,21 @@
 import { useEffect, useState } from "react";
 import { getAllProducts, getAllCategories } from "../services/api";
 import ProductCard from "../components/ProductCard";
-import SearchBar from "../components/SearchBar";
+
 import "./Home.css";
 
-function Home() {
+function Home({ searchQuery }) {
   const [products, setProducts] = useState([]);
   const [filtered, setFiltered] = useState([]);
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("all");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  useEffect(() => {
-    async function loadData() {
+useEffect(() => {
+  async function loadData() {
+    try {
+      setLoading(true);
       const [prodData, catData] = await Promise.all([
         getAllProducts(),
         getAllCategories(),
@@ -19,36 +23,47 @@ function Home() {
       setProducts(prodData);
       setFiltered(prodData);
       setCategories(catData);
+      setError(null);
+    } catch (error) {
+      console.error('Failed to load data:', error);
+      setError('Server is currently unavailable. Please try again later.');
+      setProducts([]);
+      setFiltered([]);
+      setCategories([]);
+    } finally {
+      setLoading(false);
     }
-    loadData();
-  }, []);
+  }
+  loadData();
+}, []);
 
-  const handleSearch = (query) => {
-    const searchFiltered = products.filter((p) =>
-      p.title.toLowerCase().includes(query.toLowerCase())
-    );
-    if (selectedCategory !== "all") {
-      setFiltered(
-        searchFiltered.filter((p) => p.category === selectedCategory)
+  useEffect(() => {
+    let result = products;
+    if (searchQuery) {
+      result = result.filter((p) =>
+        p.title.toLowerCase().includes(searchQuery.toLowerCase())
       );
-    } else {
-      setFiltered(searchFiltered);
     }
-  };
+    if (selectedCategory !== "all") {
+      result = result.filter((p) => p.category === selectedCategory);
+    }
+    setFiltered(result);
+  }, [products, searchQuery, selectedCategory]);
 
   const handleCategory = (category) => {
     setSelectedCategory(category);
-    if (category === "all") {
-      setFiltered(products);
-    } else {
-      setFiltered(products.filter((p) => p.category === category));
-    }
   };
+
+  if (loading) {
+    return <div className="home" style={{textAlign:"center"}}><h2>Loading products...</h2></div>;
+  }
+
+  if (error) {
+    return <div className="home" style={{textAlign:"center", color:"red"}} ><h2>{error}</h2></div>;
+  }
 
   return (
     <div className="home">
-      <SearchBar onSearch={handleSearch} />
-
       <div className="category-filter">
         <button
           className={selectedCategory === "all" ? "active" : ""}

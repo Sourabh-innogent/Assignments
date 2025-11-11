@@ -6,9 +6,10 @@ public class Student {
     protected   int marks;
     protected   String gender;
     protected   int age;
+    protected Address address;
 
     public Student() {}
-    public Student(String name, int class_id, int marks, String gender, int age) {
+    public Student(String name, int class_id, int marks, String gender, int age, Address address) {
 
             this.id = nextId++;
             this.name = name;
@@ -16,6 +17,7 @@ public class Student {
             this.marks = marks;
             this.gender = gender;
             this.age = age;
+            this.address = address;
     }
 
     @Override

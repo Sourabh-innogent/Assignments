@@ -12,7 +12,7 @@ function TaskList({ tasks, onDeleteTask, onEditTask }) {
           <TaskItem
             key={index}
             task={task}
-            index={index+1}         
+            index={index}         
             onDeleteTask={onDeleteTask}
             onEditTask={onEditTask}
           />

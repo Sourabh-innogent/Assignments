@@ -4,8 +4,13 @@ function TaskForm({ onAddTask }) {
   const [taskText, setTaskText] = useState("");
 
   const handleAdd = () => {
-    onAddTask(taskText); // send to parent (App)
+    if (taskText.trim()) {
+    onAddTask(taskText.trim()); // send to parent (App)
     setTaskText(""); // clear input field
+    }
+    else {
+      alert("Please enter a task");
+    }
   };
 
   return (

@@ -5,27 +5,38 @@ public class Main {
         StudentService studentService = new StudentService();
         studentService.insertData();
 
+        Scanner sc = new Scanner(System.in);
         while (true) {
-            Scanner sc = new Scanner(System.in);
-            System.out.println("\n\n!---Student Management System---!");
-            System.out.println("0. Add Student");
-            System.out.println("1. Find Student");
-            System.out.println("2. Student Ranks");
-            System.out.println("3. Student Result");
-            System.out.println("4. Delete Student");
-            System.out.println("5. List of Students");
-            System.out.println("6. Pagination");
-            System.out.println("7. Exit");
-            System.out.print("\nEnter your choice: ");
-            int choice = sc.nextInt();
-            switch (choice) {
+            try {
+                System.out.println("\n\n!---Student Management System---!");
+                System.out.println("0. Add Student");
+                System.out.println("1. Find Student");
+                System.out.println("2. Student Ranks");
+                System.out.println("3. Student Result");
+                System.out.println("4. Delete Student");
+                System.out.println("5. List of Students");
+                System.out.println("6. Pagination");
+                System.out.println("7. Exit");
+                System.out.print("\nEnter your choice: ");
+                
+                if (!sc.hasNextInt()) {
+                    System.out.println("Invalid input! Please enter a number.");
+                    sc.next();
+                    continue;
+                }
+                
+                int choice = sc.nextInt();
+                switch (choice) {
                 case 0:
                     String name = getValidStringInput(sc, "Enter Student Name: ");
                     int class_id = getValidIntInput(sc, "Enter ClassID: ", 1, 4);
                     int marks = getValidIntInput(sc, "Enter Student Marks (0-100): ", 0, 100);
                     String gender = getValidStringInput(sc, "Enter Student Gender (M/F): ");
                     int age = getValidIntInput(sc, "Enter Student Age: ", 1, 120);
-                    studentService.addStudent(new Student(name, class_id, marks, gender, age));
+                    int pincode = getValidIntInput(sc, "Enter Pincode: ", 100000, 999999);
+                    String city = getValidStringInput(sc, "Enter City: ");
+                    Address address = new Address(pincode, city);
+                    studentService.addStudent(name, class_id, marks, gender, age, address);
                     break;
                 case 1:
                     System.out.println("\n--- Find Student Sub-Menu ---");
@@ -41,8 +52,7 @@ public class Main {
                             return;
                         case 1:
                             System.out.println("Finding by City...");
-                            String city = getValidStringInput(sc, "Enter City : ");
-                            studentService.findByCity(city);
+                            studentService.findByCity( getValidStringInput(sc, "Enter City : "));
                             break;
                         case 2:
                             System.out.println("Finding by Pincode..");
@@ -65,7 +75,7 @@ public class Main {
 
                 case 3:
                     studentService.getResult(getValidStringInput(sc, "Enter Student Name: "));
-                    return;
+                    break;
 
                 case 4:
                     studentService.deleteStudent(getValidIntInput(sc, "Enter Student ID: ", 1, Integer.MAX_VALUE));
@@ -116,33 +126,48 @@ public class Main {
                 default:
                     System.out.println("Invalid choice!");
                     break;
+                }
+            } catch (Exception e) {
+                System.out.println("An error occurred: " + e.getMessage());
+                sc.nextLine(); // Clear buffer
             }
         }
     }
 
     private static int getValidIntInput(Scanner sc, String message, int min, int max) {
         while (true) {
-            System.out.print(message);
-            if (sc.hasNextInt()) {
-                int value = sc.nextInt();
-                if (value >= min && value <= max) return value;
-                else System.out.println("⚠️ Please enter a value between " + min + " and " + max + ".");
-            } else {
-                System.out.println("⚠️ Invalid input! Please enter a number.");
-                sc.next(); // clear wrong input
+            try {
+                System.out.print(message);
+                if (sc.hasNextInt()) {
+                    int value = sc.nextInt();
+                    if (value >= min && value <= max) return value;
+                    else System.out.println(" Please enter a value between " + min + " and " + max + ".");
+                } else {
+                    System.out.println(" Invalid input! Please enter a number.");
+                    sc.next(); // clear wrong input
+                }
+            } catch (Exception e) {
+                System.out.println(" Error reading input: " + e.getMessage());
+                sc.nextLine(); // Clear buffer
             }
         }
     }
 
-    // ✅ Validation for non-empty string input
+    //  Validation for non-empty string input
     private static String getValidStringInput(Scanner sc, String message) {
         String input;
         do {
-            System.out.print(message);
-            input = sc.next();
-            if (input.trim().isEmpty())
-                System.out.println("⚠️ Input cannot be empty.");
+            try {
+                System.out.print(message);
+                input = sc.next();
+                if (input.trim().isEmpty())
+                    System.out.println(" Input cannot be empty.");
+            } catch (Exception e) {
+                System.out.println(" Error reading input: " + e.getMessage());
+                input = "";
+                sc.nextLine(); // Clear buffer
+            }
         } while (input.trim().isEmpty());
-        return input;
+        return input.trim();
     }
 }

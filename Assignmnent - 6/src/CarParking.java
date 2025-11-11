@@ -30,13 +30,21 @@ class ParkingLot extends Thread
 public class CarParking {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        System.out.println("Enter size of a parking lot");
-        int size = input.nextInt();
-        Semaphore semaphore = new Semaphore(size);
-        for (int i = 0; i < size*2; i++) {
-            new ParkingLot(semaphore, "Car " + (i+1)).start();
+        try {
+            System.out.println("Enter size of a parking lot");
+            int size = input.nextInt();
+            if (size <= 0) {
+                System.out.println("Parking lot size must be positive!");
+                return;
+            }
+            Semaphore semaphore = new Semaphore(size);
+            for (int i = 0; i < size * 2; i++) {
+                new ParkingLot(semaphore, "Car " + (i + 1)).start();
+            }
         }
-
+        finally {
+            input.close();
+        }
 
     }
 }

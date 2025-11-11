@@ -2,13 +2,12 @@ public class Address {
     int id;
     int pincode;
     String city;
-    int student_id;
+    static int countId = 1;
 
-    public Address(int id, int pincode, String city, int student_id) {
-        this.id = id;
+    public Address(int pincode, String city) {
+        this.id = countId++;
         this.pincode = pincode;
         this.city = city;
-        this.student_id = student_id;
     }
 
     public String toString(){

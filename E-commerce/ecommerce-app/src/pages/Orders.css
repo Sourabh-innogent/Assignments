@@ -1,0 +1,158 @@
+.orders {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 25px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  font-family: "Segoe UI", Tahoma, sans-serif;
+}
+
+.orders h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.order-card {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 15px 20px;
+  margin-bottom: 1.2rem;
+  background: #fafafa;
+  transition: box-shadow 0.2s ease;
+}
+
+.order-card:hover {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Header */
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.6rem;
+}
+
+.order-header h3 {
+  font-size: 1rem;
+  color: #333;
+  margin: 0;
+}
+
+.order-status {
+  display: flex;
+  align-items: center;
+}
+
+.status {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #fff;
+  text-transform: capitalize;
+}
+
+.status.pending {
+  background: #f0ad4e;
+}
+
+.status.delivered {
+  background: #28a745;
+}
+
+.status.cancelled {
+  background: #dc3545;
+}
+
+/* Items */
+.order-items h4,
+.order-address h4 {
+  margin-bottom: 4px;
+  font-size: 0.95rem;
+  color: #444;
+}
+
+.order-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 4px;
+}
+
+/* Address */
+.order-address p {
+  margin: 2px 0;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* Total */
+.order-total {
+  margin-top: 8px;
+  font-weight: 600;
+  color: #222;
+  text-align: right;
+}
+
+/* Empty Orders */
+.orders-empty {
+  text-align: center;
+  padding: 60px 20px;
+  color: #777;
+  font-size: 1.1rem;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .orders {
+    padding: 15px;
+  }
+
+  .order-card {
+    padding: 12px;
+  }
+
+  .order-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .order-total {
+    text-align: left;
+  }
+}
+
+.order-actions {
+  margin-top: 12px;
+}
+
+.cancel-btn {
+  padding: 8px 14px;
+  border: none;
+  background-color: #d9534f;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.cancel-btn:hover {
+  background-color: #c9302c;
+}
+
+.cancel-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.orders-loading {
+  text-align: center;
+  padding: 60px 20px;
+  color: #777;
+  font-size: 1.1rem;
+}

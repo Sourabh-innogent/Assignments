@@ -3,6 +3,12 @@ public class Address {
     int pincode;
     String city;
     int student_id;
+    
+    public Address(int pincode, String city) {
+        this.pincode = pincode;
+        this.city = city;
+    }
+    
     public Address(int id, int pincode, String city, int student_id) {
         this.id = id;
         this.pincode = pincode;

@@ -5,8 +5,12 @@ import TaskList from "./component/TaskList";
 
 function App() {
   const [tasks, setTasks] = useState(() => {
+    try{
     const savedTasks = localStorage.getItem("tasks");
     return savedTasks ? JSON.parse(savedTasks) : [];
+    }catch{
+      return [];
+    }
   });
 
   useEffect(() => {
@@ -18,8 +22,8 @@ function App() {
   };
 
   const deleteTask = (index) => {
-    let newtasks = tasks.filter((_,i) => i !== index);
-    setTasks(newtasks);
+   const filteredTasks = tasks.filter((_, i) => i !== index);
+    setTasks(filteredTasks);
   };
 
   const editTask = (index, newText) => {
@@ -28,19 +32,17 @@ function App() {
     setTasks(updatedTasks);
   };
 
-  return (
-    <div>
-      <center>
-        <h1>To-Do List App</h1>
-        <TaskForm onAddTask={addTask} />
-        <TaskList
-          tasks={tasks}
-          onDeleteTask={deleteTask}
-          onEditTask={editTask}
-        />
-      </center>
-    </div>
-  );
+ return (
+  <div className="app">
+    <h1>To-Do List App</h1>
+    <TaskForm onAddTask={addTask} />
+    <TaskList
+      tasks={tasks}
+      onDeleteTask={deleteTask}
+      onEditTask={editTask}
+    />
+  </div>
+);
 }
 
 export default App;

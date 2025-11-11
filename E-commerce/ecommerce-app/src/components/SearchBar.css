@@ -1,11 +1,11 @@
 .search-bar {
   text-align: center;
-  margin: 20px 0;
+  margin: 10px 5px;
 }
 
 .search-bar input {
-  width: 60%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  width: 150%;
+  padding: 8px;
+  border: 1px solid #000000;
+  border-radius: 8px;
 }
